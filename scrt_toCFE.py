@@ -15,6 +15,8 @@ def main ():
 	result=crt.Dialog.MessageBox("Do yo want to reboot?","Tips",BUTTON_YESNOCANCEL )
 	if result!=IDYES:
 		return
+	command = crt.Dialog.Prompt("SKU","sku","")
+	
 	crt.Screen.Send("reboot"+"\r\n")
 	result1=False
 	result=crt.Screen.WaitForStrings(["Press any key to stop auto run","CFE for Foxconn Router"],30000)
@@ -24,5 +26,6 @@ def main ():
 		return 
 	while result1==False:
 		result1=send_cmd("\003","CFE>")
-	
+	if len(command) > 0:
+		send_cmd(command,"CFE>")
 main ()
