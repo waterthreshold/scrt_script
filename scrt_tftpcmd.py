@@ -24,7 +24,10 @@ def main ():
 		result=crt.Dialog.MessageBox("Do yo want to upload htm page?","Tips",BUTTON_YESNOCANCEL)
 		if result==IDYES:
 			html_page=crt.Dialog.Prompt("html page name?","","")
-			cmd += "tftp -g -l /tmp/relocate_www/{} -r {} {};".format(html_page,html_page,IP)
+			if crt.Arguments.Count >=1:
+				cmd += "tftp -g -l /tmp/relocate_www/{} -r {} {};".format(html_page,html_page,IP)
+			else:
+				cmd += "tftp -g -l /tmp/www/{} -r {} {};".format(html_page,html_page,IP)
 			
 	if prog_name!="":
 		cmd+="/tmp/{} {}".format(prog_name,option)

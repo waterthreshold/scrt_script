@@ -16,10 +16,12 @@ sku_table = {
 
 def main ():
 	sku_name = crt.Dialog.Prompt("SKU","sku","")
-	if sku_name != IDYES:
+	if len(sku_name) <=0 :
 		return
 	sku_name=sku_name.upper();
 	crt.Screen.Send ("burnsku {}".format(sku_table[sku_name])+"\r\n")
 	crt.Screen.WaitForString ("burnsku OK",3000)
 	crt.Screen.Send ("burnsku\n")
+	crt.Screen.WaitForString ("#",3000)
+	crt.Screen.Send ("nvram set sku_name={}\n".format(sku_name))
 main ()
